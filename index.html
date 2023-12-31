@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Surprise</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    .animated {
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    #video-container {
+      display: none;
+    }
+
+    .birthday-text {
+      font-size: 36px;
+      margin: 20px;
+      padding: 10px;
+      border: 2px solid #4285f4;
+      border-radius: 10px;
+      animation: bounceIn 1s ease-out;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    #page1 { background-color: #e57373; }
+    #page2 { background-color: #81C784; }
+    #page3 { background-color: #64B5F6; }
+    #page4 { background-color: #FFD54F; }
+
+    #next-button {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #next-button:hover {
+      background-color: #45a049;
+    }
+
+    #audio {
+      display: none;
+    }
+
+    #play-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #play-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<audio id="audio" loop>
+  <source src="song.mp3" type="audio/mp3">
+  Your browser does not support the audio tag.
+</audio>
+
+<div class="animated" id="page1">
+  <div class="birthday-text" id="message">Happy Birthday PUCHU</div>
+</div>
+
+<div class="animated" id="page2" style="display: none;">
+  <div class="birthday-text" id="kidding">KIDDING!</div>
+</div>
+
+<div class="animated" id="page3" style="display: none;">
+  <div class="birthday-text" id="genjutsu">You are already under my genjutsu.!!!!!!!</div>
+</div>
+
+<div id="video-container" class="animated" style="display: none;">
+  <video id="birthday-video" width="640" height="360" controls muted autoplay onended="showSisterMessage()">
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="animated" id="page4" style="display: none;">
+  <div class="birthday-text" id="sister-message">Happy Birthday BUNU!</div>
+  <button id="next-button" onclick="redirectToNextPage()">Next Page</button>
+</div>
+
+<button id="play-button" onclick="playMusic()">Play Music</button>
+
+<script>
+  function animateWithDelay(element, delay) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        element.style.display = 'block';
+        element.style.opacity = 1;
+        resolve();
+      }, delay);
+    });
+  }
+
+  async function autoTransition() {
+    await animateWithDelay(document.getElementById('page1'), 0);
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    await animateWithDelay(document.getElementById('page2'), 0);
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'block';
+    await animateWithDelay(document.getElementById('page3'), 0);
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    document.getElementById('page3').style.display = 'none';
+    document.getElementById('video-container').style.display = 'block';
+    await animateWithDelay(document.getElementById('video-container'), 0);
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    document.getElementById('video-container').style.display = 'none';
+    document.getElementById('page4').style.display = 'block';
+    await animateWithDelay(document.getElementById('page4'), 0);
+    document.getElementById('next-button').style.display = 'block';
+  }
+
+  function redirectToNextPage() {
+    // Redirect to the next HTML page
+    window.location.href = 'index2.html'; // Updated to 'index2.html'
+  }
+
+  function playMusic() {
+    // Play the audio
+    const audioElement = document.getElementById('audio');
+    audioElement.play();
+    // Hide the play button after playing
+    document.getElementById('play-button').style.display = 'none';
+    // Start the autoTransition function after user interaction (click on the play button)
+    autoTransition();
+  }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+#memories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.memory {
+    display: none;
+    margin: 20px;
+    text-align: center;
+}
+
+.memory img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#prevBtn, #nextBtn {
+    margin-top: 10px;
+    padding: 10px;
+}
